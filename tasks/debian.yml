@@ -1,8 +1,10 @@
 ---
-- name: add elastic gpg key
-  apt_key:
+- name: Add apt repository key.
+  get_url:
     url: "{{ filebeat_gpg_url }}"
-    state: present
+    dest: /etc/apt/trusted.gpg.d/filebeat.asc
+    mode: '0644'
+    force: true
 
 - name: add beats repository
   apt_repository:
